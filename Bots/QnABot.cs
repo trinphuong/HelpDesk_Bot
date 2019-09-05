@@ -67,7 +67,7 @@ namespace Microsoft.BotBuilderSamples
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text(@"自社の業務遂行のために、社外の資産や労働力を活用することです"), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text("自社の業務遂行のために社外の資産や労働力を活用することです"), cancellationToken);
             }
         }
 
