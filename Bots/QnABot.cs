@@ -28,15 +28,18 @@ namespace Microsoft.BotBuilderSamples
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            const string WelcomeText = "こんにちは、ヘルプデスクチャットボットです。\n\n" +
-                                       "会社の問題に答えます。\n\n" +
-                                       "サンプルの質問: アウトソーシングとはどのような意味ですか \n\n" +
-                                       "参照リンク: https://www.noc-net.co.jp/faq/";
+            const string WelcomeText = @"こんにちは、ヘルプデスクチャットボットです。" +
+                                        "\n\n" +
+                                       @"会社の問題に答えます。" +
+                                       "\n\n" +
+                                       @"サンプルの質問: アウトソーシングとはどのような意味ですか" +
+                                       "\n\n" +
+                                       @"参照リンク: https://www.noc-net.co.jp/faq/";
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"{WelcomeText}"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(WelcomeText), cancellationToken);
                 }
             }
         }
@@ -64,7 +67,7 @@ namespace Microsoft.BotBuilderSamples
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("申し訳ありませんが、システムにはその質問に対する正しい答えがありません。"), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(@"申し訳ありませんが、システムにはその質問に対する正しい答えがありません。"), cancellationToken);
             }
         }
 
