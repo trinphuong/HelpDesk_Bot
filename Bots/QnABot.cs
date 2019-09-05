@@ -18,7 +18,7 @@ namespace Microsoft.BotBuilderSamples
         private readonly IConfiguration _configuration;
         private readonly ILogger<QnABot> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public string text { get; set; } = "自社の業務遂行のために社外の資産や労働力を活用することです";
+        public string text { get; set; } = $"自社の業務遂行のために社外の資産や労働力を活用することです";
 
         public QnABot(IConfiguration configuration, ILogger<QnABot> logger, IHttpClientFactory httpClientFactory)
         {
