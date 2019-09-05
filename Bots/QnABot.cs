@@ -67,7 +67,7 @@ namespace Microsoft.BotBuilderSamples
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text(@"申し訳ありませんが、システムにはその質問に対する正しい答えがありません。"), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(@"申し訳ございませんが"), cancellationToken);
             }
         }
 
