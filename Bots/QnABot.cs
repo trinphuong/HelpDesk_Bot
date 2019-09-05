@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,6 +24,21 @@ namespace Microsoft.BotBuilderSamples
             _configuration = configuration;
             _logger = logger;
             _httpClientFactory = httpClientFactory;
+        }
+
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            const string WelcomeText = "こんにちは、ヘルプデスクチャットボットです。\n\n" +
+                                       "会社の問題に答えます。\n\n" +
+                                       "サンプルの質問: アウトソーシングとはどのような意味ですか \n\n" +
+                                       "参照リンク: https://www.noc-net.co.jp/faq/";
+            foreach (var member in membersAdded)
+            {
+                if (member.Id != turnContext.Activity.Recipient.Id)
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"{WelcomeText}"), cancellationToken);
+                }
+            }
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -48,7 +64,7 @@ namespace Microsoft.BotBuilderSamples
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("No QnA Maker answers were found."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text("申し訳ありませんが、システムにはその質問に対する正しい答えがありません。"), cancellationToken);
             }
         }
 
