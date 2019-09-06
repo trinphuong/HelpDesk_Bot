@@ -19,7 +19,6 @@ namespace Microsoft.BotBuilderSamples
         private readonly IConfiguration _configuration;
         private readonly ILogger<QnABot> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public string text { get; set; } = "自社の業務遂行のために社外の資産や労働力を活用することです";
 
         public QnABot(IConfiguration configuration, ILogger<QnABot> logger, IHttpClientFactory httpClientFactory)
         {
@@ -48,6 +47,7 @@ namespace Microsoft.BotBuilderSamples
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
+            const string NoAnser = @"申し訳ありませんが、システムにはその質問に対する正しい答えがありません。";
             var httpClient = _httpClientFactory.CreateClient();
             var qnaMaker = new QnAMaker(new QnAMakerEndpoint
             {
@@ -68,7 +68,7 @@ namespace Microsoft.BotBuilderSamples
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text(text), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text(NoAnser), cancellationToken);
             }
         }
 
