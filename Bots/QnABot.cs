@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -18,7 +19,7 @@ namespace Microsoft.BotBuilderSamples
         private readonly IConfiguration _configuration;
         private readonly ILogger<QnABot> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
-        public string text { get; set; } = $"©Ğ‚Ì‹Æ–±‹s‚Ì‚½‚ß‚ÉĞŠO‚Ì‘Y‚â˜J“­—Í‚ğŠˆ—p‚·‚é‚±‚Æ‚Å‚·";
+        public string text { get; set; } = "è‡ªç¤¾ã®æ¥­å‹™é‚è¡Œã®ãŸã‚ã«ç¤¾å¤–ã®è³‡ç”£ã‚„åŠ´åƒåŠ›ã‚’æ´»ç”¨ã™ã‚‹ã“ã¨ã§ã™";
 
         public QnABot(IConfiguration configuration, ILogger<QnABot> logger, IHttpClientFactory httpClientFactory)
         {
@@ -29,13 +30,13 @@ namespace Microsoft.BotBuilderSamples
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            const string WelcomeText = @"‚±‚ñ‚É‚¿‚ÍAƒwƒ‹ƒvƒfƒXƒNƒ`ƒƒƒbƒgƒ{ƒbƒg‚Å‚·B" +
+            const string WelcomeText = @"ã“ã‚“ã«ã¡ã¯ã€ãƒ˜ãƒ«ãƒ—ãƒ‡ã‚¹ã‚¯ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã§ã™ã€‚" +
                                         "\n\n" +
-                                       @"‰ïĞ‚Ì–â‘è‚É“š‚¦‚Ü‚·B" +
+                                       @"ä¼šç¤¾ã®å•é¡Œã«ç­”ãˆã¾ã™ã€‚" +
                                        "\n\n" +
-                                       @"ƒTƒ“ƒvƒ‹‚Ì¿–â: ƒAƒEƒgƒ\[ƒVƒ“ƒO‚Æ‚Í‚Ç‚Ì‚æ‚¤‚ÈˆÓ–¡‚Å‚·‚©" +
+                                       @"ã‚µãƒ³ãƒ—ãƒ«ã®è³ªå•: ã‚¢ã‚¦ãƒˆã‚½ãƒ¼ã‚·ãƒ³ã‚°ã¨ã¯ã©ã®ã‚ˆã†ãªæ„å‘³ã§ã™ã‹" +
                                        "\n\n" +
-                                       @"QÆƒŠƒ“ƒN: https://www.noc-net.co.jp/faq/";
+                                       @"å‚ç…§ãƒªãƒ³ã‚¯: https://www.noc-net.co.jp/faq/";
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
@@ -48,7 +49,6 @@ namespace Microsoft.BotBuilderSamples
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var httpClient = _httpClientFactory.CreateClient();
-
             var qnaMaker = new QnAMaker(new QnAMakerEndpoint
             {
                 KnowledgeBaseId = _configuration["QnAKnowledgebaseId"],
