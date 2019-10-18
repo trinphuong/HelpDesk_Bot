@@ -65,7 +65,7 @@ namespace Microsoft.BotBuilderSamples
             if (stepContext.ActiveDialog.State["options"] != null)
             {
                 qnaMakerOptions = stepContext.ActiveDialog.State["options"] as QnAMakerOptions;
-                scoreThreshold = qnaMakerOptions?.ScoreThreshold != null ? qnaMakerOptions.ScoreThreshold : DefaultThreshold;
+                scoreThreshold = qnaMakerOptions?.ScoreThreshold != null ? qnaMakerOptions.ScoreThreshold : DefaultThreshold; 
                 top = qnaMakerOptions?.Top != null ? qnaMakerOptions.Top : DefaultTopN;
             }
 
