@@ -1,6 +1,8 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -12,12 +14,13 @@ namespace Microsoft.BotBuilderSamples
         public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)
             : base(configuration, logger)
         {
-            // Enable logging at the adapter level using OnTurnError.
             OnTurnError = async (turnContext, exception) =>
             {
-                logger.LogError($"Exception caught : {exception}");
+                // Log any leaked exception from the application.
+                logger.LogError($"Exception caught : {exception.Message}");
+
+                // Send a catch-all apology to the user.
                 await turnContext.SendActivityAsync("Sorry, it looks like something went wrong.");
-                await turnContext.SendActivityAsync("To run this sample make sure you have the QnA model deployed.");
             };
         }
     }
