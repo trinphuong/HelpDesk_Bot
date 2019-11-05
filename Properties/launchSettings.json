@@ -7,7 +7,6 @@
       "sslPort": 0
     }
   },
-  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
@@ -15,13 +14,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "EchoBot": {
+    "QnABot": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:3979;http://localhost:3978"
+      "applicationUrl": "http://localhost:3978/"
     }
   }
 }
