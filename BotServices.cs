@@ -14,10 +14,25 @@ namespace Microsoft.BotBuilderSamples
             {
                 KnowledgeBaseId = configuration["QnAKnowledgebaseId"],
                 EndpointKey = configuration["QnAEndpointKey"],
-                Host = configuration["QnAEndpointHostName"]
+                //Host = configuration["QnAEndpointHostName"]
+                Host = GetHostname(configuration)
             });
         }
 
         public QnAMaker QnAMakerService { get; private set; }
+
+        private string GetHostname(IConfiguration configuration)
+        {
+            var hostname = configuration["QnAEndpointHostName"];
+            if (!hostname.StartsWith("https://"))
+            {
+                hostname = string.Concat("https://", hostname);
+            }
+            if (!hostname.EndsWith("/qnamaker"))
+            {
+                hostname = string.Concat(hostname, "/qnamaker");
+            }
+            return hostname;
+        }
     }
 }
