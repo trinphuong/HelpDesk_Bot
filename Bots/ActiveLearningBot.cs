@@ -21,7 +21,10 @@ namespace Microsoft.BotBuilderSamples
         protected readonly BotState UserState;
         private readonly BotServices BotServices;
         private readonly QnAMakerOptions QnaMakerOptions;
-        private const string WelcomeText = "This bot will help you to get started with Active Learning. Type a query to get started.";
+        //private const string WelcomeText = "This bot will help you to get started with Active Learning. Type a query to get started.";
+        private const string WelcomeText =@"会社の問題に答えます。" +
+                                          "\n\n" +
+                                          @"サンプルの質問: アウトソーシングとはどのような意味ですか";
 
 
         /// <summary>
@@ -126,7 +129,7 @@ namespace Microsoft.BotBuilderSamples
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     await turnContext.SendActivityAsync(
-                        $"Welcome to QnA Maker Bot {member.Name}. {WelcomeText}",
+                        $"ヘルプデスクボットへようこそ {member.Name}. {WelcomeText}",
                         cancellationToken: cancellationToken);
                 }
             }

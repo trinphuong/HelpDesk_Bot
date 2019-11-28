@@ -36,9 +36,12 @@ namespace Microsoft.BotBuilderSamples
         private const int DefaultTopN = 3;
 
         // Card parameters
-        private const string cardTitle = "Did you mean:";
-        private const string cardNoMatchText = "None of the above.";
-        private const string cardNoMatchResponse = "Thanks for the feedback.";
+        private const string cardTitle = "以下が聞きたい質問ですか？";
+        private const string cardNoMatchText = "上記のどれでもない。";
+        private const string cardNoMatchResponse = "フィードバックをお寄せいただきありがとうございます。";
+        // no result
+        private const string noResult = "申し訳ありませんが、システムにはその質問に対する正しい答えがありません。";
+
 
         /// <summary>
         /// Dialog helper to generate dialogs
@@ -161,7 +164,7 @@ namespace Microsoft.BotBuilderSamples
             }
             else
             {
-                var msg = "No QnAMaker answers found.";
+                var msg = noResult;
                 await stepContext.Context.SendActivityAsync(msg, cancellationToken: cancellationToken);
             }
 
